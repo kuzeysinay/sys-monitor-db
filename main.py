@@ -8,9 +8,9 @@ def get_system_info():
     info = {
         "os": platform.system(),
         "kernel": platform.release(),
-        "cpu_usage": psutil.cpu_percent(interval=1),
+        "cpu_usage": psutil.cpu_percent(interval=5),
         "ram_usage": psutil.virtual_memory().percent,
-        "disk_usage": psutil.disk_usage('/').percent,
+        "disk_usage": psutil.disk_usage('/mnt/c').percent,
         "timestamp": datetime.now()
     }
     return info
@@ -43,7 +43,7 @@ def insert_data(info):
     cursor.close()
     conn.close()
 
-def start_collecting(interval=20):
+def start_collecting(interval=55):
     create_table()
     while True:
         info = get_system_info()
